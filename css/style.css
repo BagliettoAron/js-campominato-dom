@@ -1,0 +1,75 @@
+
+/* ROOT */
+
+:root{
+    --header-background: white;
+    --main-background: #7fffd4;
+    --footer-background: white;
+    --inner-square-border: black;
+    --inner-square-background-active: #6495ed;
+    --inner-square-color-active: white;
+}
+
+/* RESET */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* TEST */
+
+
+/* GENERAL */
+.main-container{
+    height: 100vh;
+    width: 100%;
+}
+
+/* HEADER */
+header{
+    height: 90px;
+    width: 100%;
+    background-color: var(--header-background);
+}
+
+/* MAIN */
+main {
+    height: calc(100% - 140px);
+    width: 100%;
+    background-color: var(--main-background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* main grid */
+.game-main-grid{
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* inner square */
+.inner-square{
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+    border: 1px solid var(--inner-square-border);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.active {
+    background-color: var(--inner-square-background-active);
+    color: var(--inner-square-color-active);
+}
+
+/* FOOTER */
+footer{
+    height: 50px;
+    width: 100%;
+    background-color: var(--footer-background);
+}
