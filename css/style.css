@@ -8,6 +8,7 @@
     --inner-square-border: black;
     --inner-square-background-active: #6495ed;
     --inner-square-color-active: white;
+    --inner-square-exploded: red;
 }
 
 /* RESET */
@@ -65,6 +66,10 @@ main {
 .active {
     background-color: var(--inner-square-background-active);
     color: var(--inner-square-color-active);
+}
+
+.inner-square.exploded{
+    background-color: var(--inner-square-exploded);
 }
 
 /* FOOTER */

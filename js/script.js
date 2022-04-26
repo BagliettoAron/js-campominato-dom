@@ -1,14 +1,16 @@
 // Generare una griglia di gioco quadrata in cui ogni cella contiene un numero compreso tra 1 e 100.
 // Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 
-// 1. ottengo array dei numeri da 1 a 100
+// 1 --- ottengo array dei numeri da 1 a 100
+
 const maxLength = 100;
 
 const randomNumbersArray = generateIncrementalIntegerNumbers (maxLength)
 
 console.log(randomNumbersArray);
 
-// 2. inserisco i numeri ricavati ognuno all'interno di una casella (.inner-square)
+// 2 --- inserisco i numeri ricavati ognuno all'interno di una casella (.inner-square)
+
 // prelevo la classe della griglia
 const mainGrid = document.querySelector (".game-main-grid")
 console.log(mainGrid);
@@ -37,6 +39,19 @@ for (let i = 0; i < randomNumbersArray.length; i++) {
     console.log(mainGrid);
 }
 
+// 3 --- genero 16 caselle minate random
+
+// imposto value quantità massima celle minate
+const quantityMinedCells = 16;
+
+// call della funzione che mi darà come risultato 16 numeri random, diversi tra loro, compresi tra 1 e maxLength
+const minedCellsArray = generateUniqueRandomNumber(quantityMinedCells, maxLength);
+console.log(minedCellsArray);
+
+
+// ----------------------------------------------------------------------
+
+
 // FUNCTIONS :
 
 // genero array numeri da 1 a 100 
@@ -55,6 +70,34 @@ function generateIncrementalIntegerNumbers (maxLimit) {
 
     return array;
 }
+
+
+
+/**
+ * Description : genero la funzione che mi darà come risultato 16 numeri random, diversi tra loro, compresi tra 1 e maxLength
+ * @param {any} maxQuantityLength -> limite massimo della quantità di numeri random da generare
+ * @param {any} maxNumberLimit -> numero massimo entro il quale generare i numeri random
+ * @returns {any} -> array di numeri random con le proprietà specificate sopra
+ */
+function generateUniqueRandomNumber(maxQuantityLength, maxNumberLimit){
+    const numbersForPlaceMineArray = [];
+    
+    while (numbersForPlaceMineArray.length < maxQuantityLength) {
+        const randomNumber = getRndInteger(1, maxNumberLimit)
+        if (!numbersForPlaceMineArray.includes(randomNumber) ) {
+            numbersForPlaceMineArray.push(randomNumber);
+        }
+    }
+    return numbersForPlaceMineArray;
+}
+
+
+
+// genero numero casuale
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 
 
 
