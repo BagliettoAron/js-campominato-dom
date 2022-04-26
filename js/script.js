@@ -7,13 +7,11 @@ const maxLength = 100;
 
 const randomNumbersArray = generateIncrementalIntegerNumbers (maxLength)
 
-console.log(randomNumbersArray);
 
 // 2 --- inserisco i numeri ricavati ognuno all'interno di una casella (.inner-square)
 
 // prelevo la classe della griglia
 const mainGrid = document.querySelector (".game-main-grid")
-console.log(mainGrid);
 
 // scansiono con un ciclo for tutti gli elementi dell'array in modo da assegnare a ognuno gli elementi che andranno a formare .inner-square
 for (let i = 0; i < randomNumbersArray.length; i++) {
@@ -28,16 +26,38 @@ for (let i = 0; i < randomNumbersArray.length; i++) {
     // aggiungo lo span con il numero
     newCreatedElement.innerHTML = `<span> ${thisNumber} </span>`
     console.log(newCreatedElement);
-
+    
     // faccio in modo che il nuovo elemento creato sia triggerabile al click e uso this per triggerare solo l'elemento cliccato
-    newCreatedElement.addEventListener("click", function() {
+    newCreatedElement.addEventListener ("click", function() {
         this.classList.add("active");
+        const clickedCellNumber = parseInt(this.querySelector("span").textContent)
+        // confronto gli array
+        if (minedCellsArray.includes(clickedCellNumber)) {
+            this.classList.add("exploded")
+            alert("BOOM")
+        } else {
+            this.style.pointerEvents = "none"
+            safeCells.push(clickedCellNumber)
+            console.log("array safe Cells", safeCells);
+        }
+        
+        // 5 --- confronto il numero di celle cliccate rispetto al numero massimo di celle !esplodenti per determinare la vincita
+        const winNumber = maxLength - quantityMinedCells
+        console.log("win", winNumber);
+        
+        if (safeCells.length >= winNumber) {
+            alert("hai vinto")
+        }
+        
+        
     });
-
+    
+    
     // appendo l'elemento alla griglia che ho prelevato subito prima del ciclo for
     mainGrid.append(newCreatedElement);
-    console.log(mainGrid);
 }
+
+const safeCells = [];
 
 // 3 --- genero 16 caselle minate random
 
@@ -45,8 +65,12 @@ for (let i = 0; i < randomNumbersArray.length; i++) {
 const quantityMinedCells = 16;
 
 // call della funzione che mi darà come risultato 16 numeri random, diversi tra loro, compresi tra 1 e maxLength
-const minedCellsArray = generateUniqueRandomNumber(quantityMinedCells, maxLength);
-console.log(minedCellsArray);
+var minedCellsArray = generateUniqueRandomNumber(quantityMinedCells, maxLength);
+// console.log("mines poition", minedCellsArray);
+
+// 4 --- aggiungo proprietà ad addEventListener precedentemente utilizzato con un vietatissimo var
+
+
 
 
 // ----------------------------------------------------------------------
@@ -67,7 +91,6 @@ function generateIncrementalIntegerNumbers (maxLimit) {
         thisNumber = [i];
         array.push(parseInt(thisNumber));
     }
-
     return array;
 }
 
@@ -97,6 +120,10 @@ function generateUniqueRandomNumber(maxQuantityLength, maxNumberLimit){
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
+
+
+
+
 
 
 
